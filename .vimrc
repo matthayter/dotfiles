@@ -7,6 +7,9 @@
 "general {{
     set nocompatible               " be iMproved
     syntax on
+    " Allow buffers to be hidden, which keeps unsaved modifications in the
+    " background
+    set hidden
     set expandtab
     set backspace=2 
     set comments=sr:/*,mb:*,el:*/,://,b:#,:%,:XCOMM,n:>,:--,sr:{-,mb:-,el:-}
@@ -23,6 +26,7 @@
     set si
     set nu
     set path+=/usr/local/include
+    set ttimeoutlen=0
     "set foldmethod=indent
     "set foldnestmax=1
     "set foldcolumn=0
