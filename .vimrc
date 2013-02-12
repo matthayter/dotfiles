@@ -166,8 +166,8 @@ au BufEnter makefile set noexpandtab sts=0
 
 
 " GUI Settings {{
+    set cursorline                  " highlight current line
     if has('gui_running')
-        set cursorline                  " highlight current line
         set guioptions-=T           " remove the toolbar
         set lines=40                " 40 lines of text instead of 24,
         set columns=84
