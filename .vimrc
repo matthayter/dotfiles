@@ -37,6 +37,12 @@
     " Column 80 highlight
     set cc=80
 
+    " Tab filename completion: completes as much as possible, then lists all
+    " matches, then starts cycling completion through matches
+    set wildmode=longest,list,full
+    " see :help wildmenu
+    "set wildmenu
+
     set mouse=a
 
     set autoindent
