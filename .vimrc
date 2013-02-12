@@ -46,6 +46,9 @@
     set mouse=a
 
     set autoindent
+    " Set a current spec file with R, execute it via tmux with r.
+    "map <leader>R :let g:specFile = @% \| echo "RSpec file: " . g:specFile<CR>
+    "map <leader>r :wall \| :call Send_to_Tmux("rspec -f d " . g:specFile . "\n")<CR>
 "}}
 
 "vundle {{
@@ -68,6 +71,7 @@
     "Bundle 'neocomplcache'
     Bundle 'git://github.com/kien/ctrlp.vim.git'
     Bundle 'vim-coffee-script'
+    Bundle 'tslime.vim'
 
 
     filetype plugin indent on     " required!
