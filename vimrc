@@ -72,6 +72,7 @@
     Bundle 'git://github.com/kien/ctrlp.vim.git'
     Bundle 'vim-coffee-script'
     Bundle 'tslime.vim'
+    Bundle 'jellybeans.vim'
 
 
     filetype plugin indent on     " required!
@@ -87,8 +88,9 @@
 " }}
 
 " Vim UI {{
-    "colorscheme wombat
+    colorscheme jellybeans_pda
     highlight colorcolumn guibg=darkGrey ctermbg=darkGrey
+    set cursorline                  " highlight current line
     if has('cmdline_info')
         set ruler                   " show the ruler
         set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
@@ -130,16 +132,19 @@ au BufEnter makefile set noexpandtab sts=0
     "standard location
     let mapleader = ','
 
+    " Commands
+    command Bda bufdo bd
+
     " Copy/paste
-    nmap <C-V> "+gp
+    "nmap <C-V> "+gp
     imap <C-V> <ESC><C-V>i
     vmap <C-C> "+y
     
     " Easier moving in tabs and windows
-    map <C-J> <C-W>j<C-W>_
-    map <C-K> <C-W>k<C-W>_
-    map <C-L> <C-W>l<C-W>_
-    map <C-H> <C-W>h<C-W>_
+    map <C-J> <C-W>j
+    map <C-K> <C-W>k
+    map <C-L> <C-W>l
+    map <C-H> <C-W>h
 
     " Some helpers to edit mode
     " http://vimcasts.org/e/14
@@ -166,7 +171,6 @@ au BufEnter makefile set noexpandtab sts=0
 
 
 " GUI Settings {{
-    set cursorline                  " highlight current line
     if has('gui_running')
         set guioptions-=T           " remove the toolbar
         set lines=40                " 40 lines of text instead of 24,
