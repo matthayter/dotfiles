@@ -38,6 +38,11 @@ xterm*|rxvt*)
     ;;
 esac
  
+# bash-completion setup
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
+
 # Function to assemble the Git parsingart of our prompt.
 git_prompt ()
 {

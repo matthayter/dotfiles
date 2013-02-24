@@ -69,7 +69,10 @@
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'railscasts'
     "Bundle 'neocomplcache'
+    " Ctrl-P
     Bundle 'git://github.com/kien/ctrlp.vim.git'
+    " Markdown syntax
+    Bundle 'git://github.com/plasticboy/vim-markdown.git'
     Bundle 'vim-coffee-script'
     Bundle 'tslime.vim'
     Bundle 'jellybeans.vim'
