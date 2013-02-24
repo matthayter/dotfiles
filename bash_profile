@@ -1,8 +1,6 @@
 
-# Initialize rbenv
-eval "$(rbenv init -)"
 
-alias l='ls -G'
+alias l='ls -G --color=auto'
 alias la='l -la'
 alias ll='l -l'
 alias v=vim
@@ -70,8 +68,15 @@ git_prompt ()
 #PROMPT_COMMAND="$PROMPT_COMMAND PS1=\"${TITLEBAR}${c_path}\w${c_reset}\$(git_prompt)\n${c_user}\u${c_reset} \$ \" ;"
 PS1="${TITLEBAR}${c_path}\w${c_reset}\n\j ${c_user}\u${c_reset} \$ "
 
+# The script 'hub' (github defunkt/hub) installs to ~/bin
+export PATH="$PATH:~/bin"
+
 # Set editor to vim; tmux checks this to set its mode-keys option to vi
 export EDITOR=vim
+# Bash: don't save consecutive identical commands
+export HISTIGNORE="&"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
