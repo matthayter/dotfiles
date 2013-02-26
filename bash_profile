@@ -70,8 +70,8 @@ git_prompt ()
 }
  
 # Thy holy prompt.
-#PROMPT_COMMAND="$PROMPT_COMMAND PS1=\"${TITLEBAR}${c_path}\w${c_reset}\$(git_prompt)\n${c_user}\u${c_reset} \$ \" ;"
-PS1="${TITLEBAR}${c_path}\w${c_reset}\n\j ${c_user}\u${c_reset} \$ "
+PROMPT_COMMAND="$PROMPT_COMMAND PS1=\"${TITLEBAR}${c_path}\w${c_reset}\$(git_prompt)\n\j ${c_user}\u${c_reset} \$ \" ;"
+#PS1="${TITLEBAR}${c_path}\w${c_reset}\n\j ${c_user}\u${c_reset} \$ "
 
 # The script 'hub' (github defunkt/hub) installs to ~/bin
 export PATH="$PATH:~/bin"
