@@ -1,0 +1,13 @@
+[user]
+	name = Matthew Hayter
+	email = matthew.hayter@sitepointgroup.com
+[core]
+	editor = vim
+[alias]
+	st = status
+	co = checkout
+	br = branch
+[color]
+	ui = auto
+[push]
+	default = upstream
