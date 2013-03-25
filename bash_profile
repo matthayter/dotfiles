@@ -1,6 +1,10 @@
-
-
-alias l='ls -G --color=auto'
+# Aliases
+if [ `uname -s` = 'Darwin' ]; then
+  # MacOSX
+  alias l='ls -G'
+else
+  alias l='ls --color=auto'
+fi
 alias la='l -la'
 alias ll='l -l'
 alias v=vim
