@@ -49,6 +49,10 @@
     " Set a current spec file with R, execute it via tmux with r.
     "map <leader>R :let g:specFile = @% \| echo "RSpec file: " . g:specFile<CR>
     "map <leader>r :wall \| :call Send_to_Tmux("rspec -f d " . g:specFile . "\n")<CR>
+
+    " Swap files go into their own directory, to prevent polluting directories
+    " and in particular git status
+    set dir=~/.vim/swps
 "}}
 
 "vundle {{
@@ -133,36 +137,36 @@ au BufEnter makefile set noexpandtab sts=0
 " Key (re)Mappings {{
     "The default leader is '\', but many people prefer ',' as it's in a
     "standard location
-    let mapleader = ','
+    let mapleader = ';'
 
     " Commands
+    "Delete all buffers
     command Bda bufdo bd
 
     " Copy/paste
     "nmap <C-V> "+gp
-    imap <C-V> <ESC><C-V>i
-    vmap <C-C> "+y
+    inoremap <C-V> <ESC><C-V>i
+    vnoremap <C-C> "+y
     
     " Easier moving in tabs and windows
-    map <C-J> <C-W>j
-    map <C-K> <C-W>k
-    map <C-L> <C-W>l
-    map <C-H> <C-W>h
+    noremap <C-J> <C-W>j
+    noremap <C-K> <C-W>k
+    noremap <C-L> <C-W>l
+    noremap <C-H> <C-W>h
 
     " Some helpers to edit mode
     " http://vimcasts.org/e/14
     cnoremap %% <C-R>=expand('%:h').'/'<cr>
-    map <leader>ew :e %%
-    map <leader>es :sp %%
-    map <leader>ev :vsp %%
-    map <leader>et :tabe %%
+    nnoremap <leader>ew :e <C-R>=expand('%:h').'/'<cr>
+    nnoremap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
+    nnoremap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
+    nnoremap <leader>et :tabe <C-R>=expand('%:h').'/'<cr>
+    nnoremap <leader>er :e $MYVIMRC
 
-    map ;; @="I// \ej"<CR>
-    map ;c :s&// \?&&<CR>
-    map ;s o<ESC>cc/*<ESC>75a-<ESC>a*/<ESC>^15lR<Space>
-    map ;i o<ESC>cc#include <.h><ESC>hhi
-    map ;m o<ESC>ccint main(int argc, char **argv){<CR>return 0;<ESC>kO
-    nmap ;r yaw:%s/<C-R>0/
+    noremap ;s o<ESC>cc/*<ESC>75a-<ESC>a*/<ESC>^15lR<Space>
+    noremap ;i o<ESC>cc#include <.h><ESC>hhi
+    noremap ;m o<ESC>ccint main(int argc, char **argv){<CR>return 0;<ESC>kO
+    "nnoremap ;r yaw:%s/<C-R>0/
     " imap {<CR> {<CR>}<ESC>ko
 
 "}}
