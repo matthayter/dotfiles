@@ -6,6 +6,9 @@
 [alias]
 	st = status
 	co = checkout
+	ci = commit -v
+	ap = add -p
+	a = add
 	br = branch
 	graph = log --graph --pretty=format:\\\"%Cblue%h%Cgreen %an%Creset: %s\\\"
 	l = log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)%an%C(reset)%C(bold yellow)%d%C(reset)' --date=relative
