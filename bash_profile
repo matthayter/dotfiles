@@ -84,8 +84,3 @@ export PATH="$PATH:~/bin"
 export EDITOR=vim
 # Bash: don't save consecutive identical commands
 export HISTIGNORE="&"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
