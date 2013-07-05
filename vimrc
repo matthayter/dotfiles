@@ -77,6 +77,15 @@
     Bundle 'git://github.com/kien/ctrlp.vim.git'
     " Markdown syntax
     Bundle 'git://github.com/plasticboy/vim-markdown.git'
+    " Mustache html templates syntax
+    Bundle 'git://github.com/juvenn/mustache.vim.git'
+    " Buffer killing without closing window
+    "Bundle 'bufkill.vim'
+    " Ruby code browsing
+    Bundle 'git://github.com/vim-ruby/vim-ruby.git'
+    " Tmux integration
+    Bundle 'git://github.com/ervandew/screen.git'
+
     Bundle 'vim-coffee-script'
     Bundle 'tslime.vim'
     Bundle 'jellybeans.vim'
