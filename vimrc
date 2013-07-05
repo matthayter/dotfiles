@@ -153,9 +153,10 @@ au BufEnter makefile set noexpandtab sts=0
     command Bda bufdo bd
 
     " Copy/paste
-    "nmap <C-V> "+gp
-    inoremap <C-V> <ESC><C-V>i
-    vnoremap <C-C> "+y
+    " nmap <C-V> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+    " inoremap <C-V> <ESC><C-V>i
+    nnoremap <C-C> :.w !pbcopy<CR><CR>
+    vnoremap <C-C> :w !pbcopy<CR><CR>
     
     " Easier moving in tabs and windows
     noremap <C-J> <C-W>j
