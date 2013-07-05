@@ -202,3 +202,11 @@ au BufEnter makefile set noexpandtab sts=0
         "set term=builtin_ansi       " Make arrow and other keys work
     endif
 " }}
+
+" CtrlP options {{
+    let g:ctrlp_custom_ignore = 'tmp\|vendor\|doc\|node_modules\|DS_Store\|git'
+    let g:ctrlp_max_files = 0
+" }}
+
+" screen.vim options {{
+" }}
