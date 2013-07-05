@@ -164,6 +164,10 @@ au BufEnter makefile set noexpandtab sts=0
     noremap <C-L> <C-W>l
     noremap <C-H> <C-W>h
 
+    " Cross-pane commands
+    map <Leader>th :call ScreenShellSend("c " . line('.'))<CR>
+    map <Leader>tt :call ScreenShellSend("c")<CR>
+
     " Some helpers to edit mode
     " http://vimcasts.org/e/14
     cnoremap %% <C-R>=expand('%:h').'/'<cr>
