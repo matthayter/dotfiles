@@ -17,13 +17,12 @@
     set incsearch
     " set hlsearch
     " set ruler
-    set smartindent
     "set textwidth=79
     "set columns=83
     set tabstop=2 softtabstop=2 shiftwidth=2
     set tildeop
     set ic
-    set si
+    " set si
     set nu
     set path+=/usr/local/include
     set ttimeoutlen=0
@@ -80,11 +79,13 @@
     " Mustache html templates syntax
     Bundle 'git://github.com/juvenn/mustache.vim.git'
     " Buffer killing without closing window
-    "Bundle 'bufkill.vim'
+    Bundle 'bufkill.vim'
     " Ruby code browsing
     Bundle 'git://github.com/vim-ruby/vim-ruby.git'
     " Tmux integration
     Bundle 'git://github.com/ervandew/screen.git'
+    " Stylus syntax
+    Bundle 'git://github.com/wavded/vim-stylus.git'
 
     Bundle 'vim-coffee-script'
     Bundle 'tslime.vim'
@@ -126,6 +127,8 @@
         set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
     endif
     set scrolloff=3      " minimum lines to keep above and below cursor
+    set splitright
+    set splitbelow
 " }}
 
   " When editing a file, always jump to the last known cursor position.
@@ -165,8 +168,13 @@ au BufEnter makefile set noexpandtab sts=0
     noremap <C-H> <C-W>h
 
     " Cross-pane commands
-    map <Leader>th :call ScreenShellSend("c " . line('.'))<CR>
-    map <Leader>tt :call ScreenShellSend("c")<CR>
+    noremap <Leader>th :call ScreenShellSend("c \"" . @% . ":" . line('.') . "\"")<CR>
+    " noremap <Leader>tt :call ScreenShellSend("c")<CR>
+    noremap <Leader>tl :call ScreenShellSend("reload_files")<CR>
+    noremap <Leader>ta :call ScreenShellSend("c \"" . @% . ":0\"")<CR>
+
+    " Cross-pane rspec
+    noremap <Leader>tt :call ScreenShellSend("rspec")<CR>
 
     " Some helpers to edit mode
     " http://vimcasts.org/e/14
@@ -175,12 +183,20 @@ au BufEnter makefile set noexpandtab sts=0
     nnoremap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
     nnoremap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
     nnoremap <leader>et :tabe <C-R>=expand('%:h').'/'<cr>
-    nnoremap <leader>er :e $MYVIMRC
 
-    noremap ;s o<ESC>cc/*<ESC>75a-<ESC>a*/<ESC>^15lR<Space>
-    noremap ;i o<ESC>cc#include <.h><ESC>hhi
-    noremap ;m o<ESC>ccint main(int argc, char **argv){<CR>return 0;<ESC>kO
-    "nnoremap ;r yaw:%s/<C-R>0/
+    " Quick edit VIMRC
+    nnoremap <leader>er :e $MYVIMRC<cr>
+
+    " Quick open screen shell
+    nnoremap <leader>s :ScreenShell!<CR>
+
+    " Find/replace word under cursor
+    nnoremap ;r yiw:%s/\<<C-R>0\>/
+
+    " For editing C files
+    "noremap ;s o<ESC>cc/*<ESC>75a-<ESC>a*/<ESC>^15lR<Space>
+    "noremap ;i o<ESC>cc#include <.h><ESC>hhi
+    "noremap ;m o<ESC>ccint main(int argc, char **argv){<CR>return 0;<ESC>kO
     " imap {<CR> {<CR>}<ESC>ko
 
 "}}
@@ -188,8 +204,16 @@ au BufEnter makefile set noexpandtab sts=0
 " Filetype recognition {{
     autocmd BufNewFile,BufRead Gemfile set filetype=ruby
     autocmd BufNewFile,BufRead Guardfile set filetype=ruby
+    autocmd BufNewFile,BufRead *.styl set filetype=stylus
 "}}
 
+" Convenience functions {{
+    " Submit control char like this: This sends (Ctrl-C, Up) to other screen:
+    " :call MapScreenSend('r', '<C-V><C-C><C-V>^[OA')
+    function MapScreenSend(mapping, send_cmd)
+      execute "noremap <Leader>" . a:mapping . " :call ScreenShellSend('" . a:send_cmd . "')<CR>"
+    endfunction
+" }}
 
 " GUI Settings {{
     if has('gui_running')
@@ -206,7 +230,9 @@ au BufEnter makefile set noexpandtab sts=0
 " CtrlP options {{
     let g:ctrlp_custom_ignore = 'tmp\|vendor\|doc\|node_modules\|DS_Store\|git'
     let g:ctrlp_max_files = 0
+    let g:ctrlp_working_path_mode = 0
 " }}
 
 " screen.vim options {{
+    let g:ScreenShellQuitOnVimExit = 0
 " }}
