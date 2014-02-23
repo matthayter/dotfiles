@@ -8,6 +8,10 @@ fi
 alias la='l -la'
 alias ll='l -l'
 alias v=vim
+alias g=git
+alias gl='git l'
+alias gs='git st'
+alias gd='git diff'
 
 # Rails aliases
 alias bx='bundle exec'
@@ -47,6 +51,9 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
+[[ -s /Users/mhayter/.nvm/nvm.sh ]] && . /Users/mhayter/.nvm/nvm.sh # This loads NVM
+[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion # This loads completion for NVM
+
 # Function to assemble the Git parsingart of our prompt.
 git_prompt ()
 {
@@ -84,3 +91,18 @@ export PATH="$PATH:~/bin"
 export EDITOR=vim
 # Bash: don't save consecutive identical commands
 export HISTIGNORE="&"
+# Bash: Lots of history
+export HISTSIZE="1000000"
+
+# Vi-style controls on command line
+set -o vi
+
+# Set the working directory as the tmux window name
+cd ()
+{
+  builtin cd $@
+  eval "$CD_POST_CMD"
+}
+CD_POST_CMD+='[[ $TMUX ]] && tmux renamew $(basename $PWD);'
+# Pretend we cd'd into the starting directory.
+eval "$CD_POST_CMD"
