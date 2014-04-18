@@ -86,9 +86,10 @@
     Bundle 'git://github.com/ervandew/screen.git'
     " Stylus syntax
     Bundle 'git://github.com/wavded/vim-stylus.git'
+    " Paste some vim text to a tmux session.
+    "Bundle 'tslime.vim'
 
     Bundle 'vim-coffee-script'
-    Bundle 'tslime.vim'
     Bundle 'jellybeans.vim'
 
 
@@ -158,8 +159,8 @@ au BufEnter makefile set noexpandtab sts=0
     " Copy/paste
     " nmap <C-V> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
     " inoremap <C-V> <ESC><C-V>i
-    nnoremap <C-C> :.w !pbcopy<CR><CR>
-    vnoremap <C-C> :w !pbcopy<CR><CR>
+    " nnoremap <C-C> :.w !pbcopy<CR><CR>
+    " vnoremap <C-C> :w !pbcopy<CR><CR>
     
     " Easier moving in tabs and windows
     noremap <C-J> <C-W>j
