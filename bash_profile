@@ -8,10 +8,6 @@ fi
 alias la='l -la'
 alias ll='l -l'
 alias v=vim
-alias g=git
-alias gl='git l'
-alias gs='git st'
-alias gd='git diff'
 
 # Rails aliases
 alias bx='bundle exec'
@@ -46,10 +42,23 @@ xterm*|rxvt*)
     ;;
 esac
  
-# bash-completion setup
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+if [ `uname -s` = 'Darwin' ]; then
+  # Mac OSX bash-completion setup
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+  fi
+
+  # Use a function from git_completion.bash to have completions work with the alias
+  alias co="git checkout"
+  __git_complete co _git_checkout
+  alias g=git
+  __git_complete g _git
+  alias gl='git l'
+  __git_complete gl _git_log
+  alias gs='git st'
+  alias gd='git diff'
 fi
+
 
 [[ -s /Users/mhayter/.nvm/nvm.sh ]] && . /Users/mhayter/.nvm/nvm.sh # This loads NVM
 [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion # This loads completion for NVM
@@ -84,8 +93,13 @@ git_prompt ()
 PROMPT_COMMAND="$PROMPT_COMMAND PS1=\"${TITLEBAR}${c_path}\w${c_reset}\$(git_prompt)\n\j ${c_user}\u${c_reset} \$ \" ;"
 #PS1="${TITLEBAR}${c_path}\w${c_reset}\n\j ${c_user}\u${c_reset} \$ "
 
-# The script 'hub' (github defunkt/hub) installs to ~/bin
+# Add personal bin dir.
+# The script 'hub' (github defunkt/hub) also installs to ~/bin
 export PATH="$PATH:~/bin"
+# The haskell installer tool 'stack' uses this to install apps from cabel etc.
+export PATH="$PATH:~/.local/bin"
+# Cabal install executables from hackage packages here
+export PATH="$PATH:~/.cabal/bin"
 
 # Set editor to vim; tmux checks this to set its mode-keys option to vi
 export EDITOR=vim
@@ -96,6 +110,9 @@ export HISTSIZE="1000000"
 
 # Vi-style controls on command line
 set -o vi
+
+# Bump the open file limit
+ulimit -n 4096
 
 # Set the working directory as the tmux window name
 cd ()
