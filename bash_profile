@@ -101,6 +101,10 @@ export PATH="$PATH:~/.local/bin"
 # Cabal install executables from hackage packages here
 export PATH="$PATH:~/.cabal/bin"
 
+# Handy tmux scripts I wrote
+DOTFILES_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+export PATH="$PATH:$DOTFILES_DIR/tmux_scripts"
+
 # Set editor to vim; tmux checks this to set its mode-keys option to vi
 export EDITOR=vim
 # Bash: don't save consecutive identical commands
