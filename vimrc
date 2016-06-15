@@ -1,8 +1,69 @@
 " Modeline and Notes {{
 " vim: set foldmarker={{,}} foldlevel=0 foldmethod=marker spell:
-"
-"  You can find me at http://spf13.com
 "}}
+
+"vundle {{
+    filetype off                   " required!
+
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+
+    " let Vundle manage Vundle, required
+    Plugin 'VundleVim/Vundle.vim'
+
+    " My Bundles here:
+    "
+    " original repos on github
+    Plugin 'tpope/vim-fugitive'
+    "Plugin 'Lokaltog/vim-easymotion'
+    Plugin 'Lokaltog/vim-powerline'
+    Plugin 'railscasts'
+    "Plugin 'neocomplcache'
+    " Ctrl-P
+    Plugin 'git://github.com/kien/ctrlp.vim.git'
+    " Markdown syntax
+    Plugin 'git://github.com/plasticboy/vim-markdown.git'
+    " Mustache html templates syntax
+    Plugin 'git://github.com/juvenn/mustache.vim.git'
+    " Buffer killing without closing window
+    Plugin 'bufkill.vim'
+    " Rename current file
+    Plugin 'Rename'
+    " Ruby code browsing
+    Plugin 'git://github.com/vim-ruby/vim-ruby.git'
+    " Tmux integration
+    Plugin 'git://github.com/ervandew/screen.git'
+    " Stylus syntax
+    "Plugin 'git://github.com/wavded/vim-stylus.git'
+    " Less syntax
+    Plugin 'groenewege/vim-less'
+    " Groovy syntax
+    Plugin 'groovy.vim'
+    " Go syntax
+    Plugin 'fatih/vim-go'
+    " Table mode
+    "Plugin 'git://github.com/dhruvasagar/vim-table-mode.git'
+
+    " Close HTML tags with Ctrl-_
+    "Bundle 'closetag.vim'
+    " Paste some vim text to a tmux session.
+    "Bundle 'tslime.vim'
+
+    Bundle 'vim-coffee-script'
+    Bundle 'jellybeans.vim'
+
+    " All of your Plugins must be added before the following line
+    call vundle#end()            " required
+    filetype plugin indent on     " required!
+    " Brief help
+    " :PluginList       - lists configured plugins
+    " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+    " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+    " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+    "
+    " see :h vundle for more details or wiki for FAQ
+    " Put your non-Plugin stuff after this line
+" }}
 
 "general {{
     set nocompatible               " be iMproved
@@ -17,7 +78,7 @@
     set incsearch
     " set hlsearch
     " set ruler
-    "set textwidth=79
+    set textwidth=119
     "set columns=83
     set tabstop=2 softtabstop=2 shiftwidth=2
     set tildeop
@@ -33,8 +94,8 @@
     " Indent to the opening paren if inside parens
     set cino=(0
 
-    " Column 80 highlight
-    set cc=80
+    " Column 120 highlight
+    set cc=120
 
     " Tab filename completion: completes as much as possible, then lists all
     " matches, then starts cycling completion through matches
@@ -54,56 +115,21 @@
     set dir=~/.vim/swps
 "}}
 
-"vundle {{
-    filetype off                   " required!
+"Custom functions {{
+    fu! DiffTheirs()
+      Gvsplit :1
+      difft
+      Gvsplit :3
+      difft
+    endf
 
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
-
-    " let Vundle manage Vundle
-    " required! 
-    Bundle 'gmarik/vundle'
-
-    " My Bundles here:
-    "
-    " original repos on github
-    Bundle 'tpope/vim-fugitive'
-    "Bundle 'Lokaltog/vim-easymotion'
-    Bundle 'Lokaltog/vim-powerline'
-    Bundle 'railscasts'
-    "Bundle 'neocomplcache'
-    " Ctrl-P
-    Bundle 'git://github.com/kien/ctrlp.vim.git'
-    " Markdown syntax
-    Bundle 'git://github.com/plasticboy/vim-markdown.git'
-    " Mustache html templates syntax
-    Bundle 'git://github.com/juvenn/mustache.vim.git'
-    " Buffer killing without closing window
-    Bundle 'bufkill.vim'
-    " Ruby code browsing
-    Bundle 'git://github.com/vim-ruby/vim-ruby.git'
-    " Tmux integration
-    Bundle 'git://github.com/ervandew/screen.git'
-    " Stylus syntax
-    Bundle 'git://github.com/wavded/vim-stylus.git'
-    " Paste some vim text to a tmux session.
-    "Bundle 'tslime.vim'
-
-    Bundle 'vim-coffee-script'
-    Bundle 'jellybeans.vim'
-
-
-    filetype plugin indent on     " required!
-    "
-    " Brief help
-    " :BundleList          - list configured bundles
-    " :BundleInstall(!)    - install(update) bundles
-    " :BundleSearch(!) foo - search(or refresh cache first) for foo
-    " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-    "
-    " see :h vundle for more details or wiki for FAQ
-    " NOTE: comments after Bundle command are not allowed..
-" }}
+    fu! DiffOurs()
+      Gvsplit :1
+      difft
+      Gvsplit :2
+      difft
+    endf
+"}}
 
 " Vim UI {{
     colorscheme jellybeans_pda
@@ -179,7 +205,7 @@ au BufEnter makefile set noexpandtab sts=0
 
     " Some helpers to edit mode
     " http://vimcasts.org/e/14
-    cnoremap %% <C-R>=expand('%:h').'/'<cr>
+    cnoremap %% <C-R>=expand('%')<cr>
     nnoremap <leader>ew :e <C-R>=expand('%:h').'/'<cr>
     nnoremap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
     nnoremap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
@@ -192,7 +218,16 @@ au BufEnter makefile set noexpandtab sts=0
     nnoremap <leader>s :ScreenShell!<CR>
 
     " Find/replace word under cursor
-    nnoremap ;r yiw:%s/\<<C-R>0\>/
+    nnoremap <leader>r yiw:%s/\<<C-R>0\>/
+
+    " Replace the current line with the contents between the Visual marks
+    " (line-wise) and substitute in the current line for any occurance of
+    " 'HERE' in the marked content.
+    nnoremap <leader>R 0ma"ad$'<V'>y'add"0p:'[,']s/HERE/\=@a/
+
+
+    " Snake case word under cursor
+    "nnoremap <leader>rs yiw:%s/\<<C-R>0\>/
 
     " For editing C files
     "noremap ;s o<ESC>cc/*<ESC>75a-<ESC>a*/<ESC>^15lR<Space>
@@ -206,6 +241,7 @@ au BufEnter makefile set noexpandtab sts=0
     autocmd BufNewFile,BufRead Gemfile set filetype=ruby
     autocmd BufNewFile,BufRead Guardfile set filetype=ruby
     autocmd BufNewFile,BufRead *.styl set filetype=stylus
+    autocmd BufNewFile,BufRead *.gradle set filetype=groovy
 "}}
 
 " Convenience functions {{
