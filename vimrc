@@ -265,9 +265,9 @@ au BufEnter makefile set noexpandtab sts=0
 " }}
 
 " CtrlP options {{
-    let g:ctrlp_custom_ignore = 'tmp\|vendor\|doc\|node_modules\|DS_Store\|git'
+    let g:ctrlp_custom_ignore = 'node_modules\|^.DS_Store$\|^.git$\|.pyc$'
     let g:ctrlp_max_files = 0
-    let g:ctrlp_working_path_mode = 0
+    let g:ctrlp_working_path_mode = 'r'
 " }}
 
 " screen.vim options {{
