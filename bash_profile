@@ -1,3 +1,19 @@
+function make-completion-wrapper () {
+  local function_name="$2"
+  local arg_count=$(($#-3))
+  local comp_function_name="$1"
+  shift 2
+  local function="
+    function $function_name {
+      ((COMP_CWORD+=$arg_count))
+      COMP_WORDS=( "$@" \${COMP_WORDS[@]:1} )
+      "$comp_function_name"
+      return 0
+    }"
+  eval "$function" > /dev/null 2>&1
+}
+
+
 # Aliases
 if [ `uname -s` = 'Darwin' ]; then
   # MacOSX
@@ -8,6 +24,10 @@ fi
 alias la='l -la'
 alias ll='l -l'
 alias v=vim
+
+alias d=docker
+make-completion-wrapper _docker _docker1 docker
+complete -F _docker1 d
 
 # Rails aliases
 alias bx='bundle exec'
@@ -60,8 +80,17 @@ if [ `uname -s` = 'Darwin' ]; then
 fi
 
 
+# NVM
 [[ -s /Users/mhayter/.nvm/nvm.sh ]] && . /Users/mhayter/.nvm/nvm.sh # This loads NVM
 [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion # This loads completion for NVM
+
+# Python virtualenvwrapper
+if [[ -e /usr/local/bin/virtualenvwrapper_lazy.sh ]]; then
+  export WORKON_HOME=$HOME/.virtualenvs
+  export PROJECT_HOME=$HOME/dev
+  export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+  source /usr/local/bin/virtualenvwrapper_lazy.sh
+fi
 
 # Function to assemble the Git parsingart of our prompt.
 git_prompt ()
@@ -95,7 +124,7 @@ PROMPT_COMMAND="$PROMPT_COMMAND PS1=\"${TITLEBAR}${c_path}\w${c_reset}\$(git_pro
 
 # Add personal bin dir.
 # The script 'hub' (github defunkt/hub) also installs to ~/bin
-export PATH="$PATH:~/bin"
+export PATH="~/bin:$PATH"
 # The haskell installer tool 'stack' uses this to install apps from cabel etc.
 export PATH="$PATH:~/.local/bin"
 # Cabal install executables from hackage packages here
@@ -112,18 +141,22 @@ export HISTIGNORE="&"
 # Bash: Lots of history
 export HISTSIZE="1000000"
 
+# Set java home
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+
 # Vi-style controls on command line
 set -o vi
 
 # Bump the open file limit
 ulimit -n 4096
 
-# Set the working directory as the tmux window name
+# Set the git project directory as the tmux window name; if we're not in a git
+# project, use the PWD
 cd ()
 {
   builtin cd $@
   eval "$CD_POST_CMD"
 }
-CD_POST_CMD+='[[ $TMUX ]] && tmux renamew $(basename $PWD);'
+CD_POST_CMD+='[[ $TMUX ]] && tmux renamew $(basename $(git rev-parse --show-toplevel 2>/dev/null || pwd));'
 # Pretend we cd'd into the starting directory.
 eval "$CD_POST_CMD"
