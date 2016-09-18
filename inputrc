@@ -1,6 +1,10 @@
 set editing-mode vi
 
-"\C-p": previous-history
-"\C-n": next-history
+"\C-p": history-search-backward
+"\C-n": history-search-forward
 "\C-l": clear-screen
 "\e.": insert-last-argument
+"\e[A":history-search-backward
+"\e[B":history-search-forward
+#"\C-.": insert-last-argument
+set completion-ignore-case On
