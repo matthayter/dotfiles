@@ -3,66 +3,67 @@
 "}}
 
 "vundle {{
-    filetype off                   " required!
+    filetype plugin indent on
 
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
+    "let $PATH = $PATH . ':' . expand('~/.local/bin')
+
+    " https://github.com/junegunn/vim-plug
+    call plug#begin()
 
     " let Vundle manage Vundle, required
-    Plugin 'VundleVim/Vundle.vim'
+    Plug 'VundleVim/Vundle.vim'
 
     " My Bundles here:
     "
     " original repos on github
-    Plugin 'tpope/vim-fugitive'
-    "Plugin 'Lokaltog/vim-easymotion'
-    Plugin 'Lokaltog/vim-powerline'
-    Plugin 'railscasts'
-    "Plugin 'neocomplcache'
+    Plug 'tpope/vim-fugitive'
+    "Plug 'Lokaltog/vim-easymotion'
+    Plug 'Lokaltog/vim-powerline'
+    Plug 'railscasts'
+    "Plug 'neocomplcache'
     " Ctrl-P
-    Plugin 'git://github.com/kien/ctrlp.vim.git'
+    Plug 'git://github.com/kien/ctrlp.vim.git'
     " Markdown syntax
-    Plugin 'git://github.com/plasticboy/vim-markdown.git'
+    Plug 'git://github.com/plasticboy/vim-markdown.git'
     " Mustache html templates syntax
-    Plugin 'git://github.com/juvenn/mustache.vim.git'
+    Plug 'git://github.com/juvenn/mustache.vim.git'
     " Buffer killing without closing window
-    Plugin 'bufkill.vim'
+    Plug 'bufkill.vim'
     " Rename current file
-    Plugin 'Rename'
+    Plug 'Rename'
     " Ruby code browsing
-    Plugin 'git://github.com/vim-ruby/vim-ruby.git'
+    Plug 'git://github.com/vim-ruby/vim-ruby.git'
     " Tmux integration
-    Plugin 'git://github.com/ervandew/screen.git'
+    Plug 'git://github.com/ervandew/screen.git'
     " Stylus syntax
-    "Plugin 'git://github.com/wavded/vim-stylus.git'
+    "Plug 'git://github.com/wavded/vim-stylus.git'
     " Less syntax
-    Plugin 'groenewege/vim-less'
+    Plug 'groenewege/vim-less'
     " Groovy syntax
-    Plugin 'groovy.vim'
+    Plug 'groovy.vim'
     " Go syntax
-    Plugin 'fatih/vim-go'
+    Plug 'fatih/vim-go'
     " Table mode
-    "Plugin 'git://github.com/dhruvasagar/vim-table-mode.git'
+    "Plug 'git://github.com/dhruvasagar/vim-table-mode.git'
 
     " Close HTML tags with Ctrl-_
     "Bundle 'closetag.vim'
     " Paste some vim text to a tmux session.
     "Bundle 'tslime.vim'
 
-    Bundle 'vim-coffee-script'
-    Bundle 'jellybeans.vim'
+    "Plug 'vim-coffee-script'
+    Plug 'jellybeans.vim'
+
+    " Async completion for neovim.
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+    " IDE features for haskell.
+    Plug 'https://github.com/Shougo/vimproc.vim.git', {'do': 'make'}
+    Plug 'https://github.com/eagletmt/ghcmod-vim'
 
     " All of your Plugins must be added before the following line
-    call vundle#end()            " required
-    filetype plugin indent on     " required!
-    " Brief help
-    " :PluginList       - lists configured plugins
-    " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-    " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-    " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-    "
-    " see :h vundle for more details or wiki for FAQ
-    " Put your non-Plugin stuff after this line
+    call plug#end()            " required
+
 " }}
 
 "general {{
@@ -145,15 +146,15 @@
     if has('statusline')
         set laststatus=2
 
-        " Broken down into easily includeable segments
+        " Broken down into easily include-able segments
         set statusline=%<%f\    " Filename
         set statusline+=%w%h%m%r " Options
         set statusline+=%{fugitive#statusline()} "  Git Hotness
         set statusline+=\ [%{&ff}/%Y]            " filetype
         set statusline+=\ [%{getcwd()}]          " current dir
-        set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+        set statusline+=%=%-10.(%l,%c%V%)\ %p%%  " Right aligned file nav info
     endif
-    set scrolloff=3      " minimum lines to keep above and below cursor
+    set scrolloff=5      " minimum lines to keep above and below cursor
     set splitright
     set splitbelow
 " }}
@@ -272,4 +273,8 @@ au BufEnter makefile set noexpandtab sts=0
 
 " screen.vim options {{
     let g:ScreenShellQuitOnVimExit = 0
+" }}
+
+" deoplete options {{
+    let g:deoplete#enable_at_startup = 1
 " }}

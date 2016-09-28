@@ -23,7 +23,8 @@ else
 fi
 alias la='l -la'
 alias ll='l -l'
-alias v=vim
+alias v=nvim
+alias vim=nvim
 
 alias d=docker
 make-completion-wrapper _docker _docker1 docker
@@ -126,7 +127,8 @@ PROMPT_COMMAND="$PROMPT_COMMAND PS1=\"${TITLEBAR}${c_path}\w${c_reset}\$(git_pro
 # The script 'hub' (github defunkt/hub) also installs to ~/bin
 export PATH="~/bin:$PATH"
 # The haskell installer tool 'stack' uses this to install apps from cabel etc.
-export PATH="$PATH:~/.local/bin"
+localbin=~/.local/bin
+export PATH="$PATH:$localbin"
 # Cabal install executables from hackage packages here
 export PATH="$PATH:~/.cabal/bin"
 
@@ -135,7 +137,7 @@ DOTFILES_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 export PATH="$PATH:$DOTFILES_DIR/tmux_scripts"
 
 # Set editor to vim; tmux checks this to set its mode-keys option to vi
-export EDITOR=vim
+export EDITOR=nvim
 # Bash: don't save consecutive identical commands
 export HISTIGNORE="&"
 # Bash: Lots of history
