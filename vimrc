@@ -11,7 +11,7 @@
     call plug#begin()
 
     " let Vundle manage Vundle, required
-    Plug 'VundleVim/Vundle.vim'
+    "Plug 'VundleVim/Vundle.vim'
 
     " My Bundles here:
     "
@@ -19,7 +19,6 @@
     Plug 'tpope/vim-fugitive'
     "Plug 'Lokaltog/vim-easymotion'
     Plug 'Lokaltog/vim-powerline'
-    Plug 'railscasts'
     "Plug 'neocomplcache'
     " Ctrl-P
     Plug 'git://github.com/kien/ctrlp.vim.git'
@@ -27,10 +26,12 @@
     Plug 'git://github.com/plasticboy/vim-markdown.git'
     " Mustache html templates syntax
     Plug 'git://github.com/juvenn/mustache.vim.git'
+
     " Buffer killing without closing window
-    Plug 'bufkill.vim'
+    " Plug 'bufkill.vim'
+     
     " Rename current file
-    Plug 'Rename'
+    "Plug 'Rename'
     " Ruby code browsing
     Plug 'git://github.com/vim-ruby/vim-ruby.git'
     " Tmux integration
@@ -39,8 +40,6 @@
     "Plug 'git://github.com/wavded/vim-stylus.git'
     " Less syntax
     Plug 'groenewege/vim-less'
-    " Groovy syntax
-    Plug 'groovy.vim'
     " Go syntax
     Plug 'fatih/vim-go'
     " Table mode
@@ -52,10 +51,10 @@
     "Bundle 'tslime.vim'
 
     "Plug 'vim-coffee-script'
-    Plug 'jellybeans.vim'
+    Plug 'nanotech/jellybeans.vim', { 'tag': 'v1.6' }
 
     " Async completion for neovim.
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
     " IDE features for haskell.
     Plug 'https://github.com/Shougo/vimproc.vim.git', {'do': 'make'}

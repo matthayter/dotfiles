@@ -78,6 +78,12 @@ if [ `uname -s` = 'Darwin' ]; then
   __git_complete gl _git_log
   alias gs='git st'
   alias gd='git diff'
+else
+  alias co="git checkout"
+  alias g=git
+  alias gl='git l'
+  alias gs='git st'
+  alias gd='git diff'
 fi
 
 
