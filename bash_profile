@@ -23,8 +23,8 @@ else
 fi
 alias la='l -la'
 alias ll='l -l'
-alias v=nvim
-alias vim=nvim
+alias v=vim
+#alias vim=nvim
 
 alias d=docker
 make-completion-wrapper _docker _docker1 docker
@@ -144,7 +144,9 @@ export HISTIGNORE="&"
 export HISTSIZE="1000000"
 
 # Set java home
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+if [[ -e /usr/libexec/java_home ]]; then
+  export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+fi
 
 # Vi-style controls on command line
 set -o vi
