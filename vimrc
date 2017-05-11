@@ -57,8 +57,8 @@
     "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
     " IDE features for haskell.
-    Plug 'https://github.com/Shougo/vimproc.vim.git', {'do': 'make'}
-    Plug 'https://github.com/eagletmt/ghcmod-vim'
+    "Plug 'https://github.com/Shougo/vimproc.vim.git', {'do': 'make'}
+    "Plug 'https://github.com/eagletmt/ghcmod-vim'
 
     " All of your Plugins must be added before the following line
     call plug#end()            " required
