@@ -30,3 +30,5 @@
 	prompt = false
 [rerere]
 	enabled = true
+[init]
+	defaultBranch = master
