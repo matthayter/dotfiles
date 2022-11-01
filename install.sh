@@ -1,4 +1,4 @@
 #! /bin/zsh
 for f in zshrc; do
-	ln -s $(pwd)/$f "${HOME}/.${f}";
+	ln -fs $(pwd)/$f "${HOME}/.${f}";
 done
