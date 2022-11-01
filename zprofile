@@ -1,22 +1,7 @@
+# Set PATH, MANPATH, etc., for Homebrew.
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-alias la='ls -la'
-alias ll='ls -l'
-alias v=vim
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-
-if [ `uname -s` = 'Darwin' ]; then
-  # Mac OSX bash-completion setup
-  if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-    autoload -Uz compinit
-    compinit
-  fi
-fi
-
-alias co="git checkout"
-alias g=git
-alias gl='git l'
-alias gs='git st'
-alias gd='git diff'

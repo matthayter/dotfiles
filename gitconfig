@@ -1,13 +1,15 @@
 [user]
 	name = Matthew Hayter
-	email = mhayter@groupon.com
+	email = mhayter@maystreet.com
 [core]
 	editor = vim
 	gitproxy = github_host for github
 [alias]
+	dc = diff --cached
 	st = status
 	co = checkout
 	ci = commit -v
+	cia = commit --amend --no-edit
 	ap = add -p
 	a = add
 	br = branch
